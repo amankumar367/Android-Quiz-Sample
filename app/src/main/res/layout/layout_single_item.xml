@@ -54,6 +54,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="1,233 K" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_first_answer_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_first_answer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_first_answer"
+                app:layout_constraintTop_toTopOf="@+id/tv_first_answer"
+                app:srcCompat="@drawable/ic_check"/>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_second_answer"
                 android:layout_width="0dp"
@@ -70,6 +81,17 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_first_answer"
                 app:layout_constraintTop_toBottomOf="@+id/tv_first_answer"
                 tools:text="5,778 K" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_second_answer_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_second_answer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_second_answer"
+                app:layout_constraintTop_toTopOf="@+id/tv_second_answer"
+                app:srcCompat="@drawable/ic_check"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_third_answer"
@@ -88,6 +110,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_second_answer"
                 tools:text="12,130 K" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_third_answer_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_third_answer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_third_answer"
+                app:layout_constraintTop_toTopOf="@+id/tv_third_answer"
+                app:srcCompat="@drawable/ic_check"/>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_fourth_answer"
                 android:layout_width="0dp"
@@ -104,6 +137,17 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_third_answer"
                 app:layout_constraintTop_toBottomOf="@+id/tv_third_answer"
                 tools:text="101,300 K" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_fourth_answer_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_fourth_answer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_fourth_answer"
+                app:layout_constraintTop_toTopOf="@+id/tv_fourth_answer"
+                app:srcCompat="@drawable/ic_check"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_current_page"

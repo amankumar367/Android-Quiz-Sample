@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.SnapHelper
 import com.aman.quizsample.R
 import com.aman.quizsample.databinding.ActivityMainBinding
 import com.aman.quizsample.extension.createFactory
+import com.aman.quizsample.extension.mapInPlace
 import com.aman.quizsample.repo.QuizRepoI
+import com.aman.quizsample.room.entity.Answer
 import com.aman.quizsample.room.entity.Quiz
+import com.aman.quizsample.ui.adapter.OnClickListener
 import com.aman.quizsample.ui.helper.SnapOnScrollListener.Companion.NOTIFY_ON_SCROLL
 import com.aman.quizsample.ui.adapter.QuizAdapter
 import com.aman.quizsample.ui.helper.SnapHelperByOne
@@ -32,6 +35,8 @@ class MainActivity : DaggerAppCompatActivity() {
     private lateinit var adapter: QuizAdapter
 
     private var quizList: List<Quiz> = listOf()
+
+    private var answeredList: List<Answer> = mutableListOf()
 
     private val snapHelper = SnapHelperByOne()
 
@@ -80,7 +85,32 @@ class MainActivity : DaggerAppCompatActivity() {
     private fun setRecyclerView() {
         rv_answers.layoutManager = LinearLayoutManager(
             this, RecyclerView.HORIZONTAL, false)
-        adapter = QuizAdapter(quizList)
+        adapter = QuizAdapter(quizList, answeredList, object : OnClickListener{
+            override fun onItemClick(quiz: Quiz, position: Int, answerIndex: Int) {
+                if (answeredList.isEmpty()) {
+                    answeredList =
+                        answeredList + Answer(quiz.question, position, answerIndex, quiz.correctIndex)
+                } else {
+                    var isItemFound = false
+                    answeredList.find {
+                        if (it.selectedPosition == position) {
+                            it.answerIndex = answerIndex
+                            isItemFound = true
+                            true
+                        } else {
+                            false
+                        }
+                    }
+
+                    if (!isItemFound) {
+                        answeredList = answeredList + Answer(quiz.question, position, answerIndex, quiz.correctIndex)
+                    }
+                }
+
+                adapter.answerList = answeredList
+                adapter.notifyItemChanged(position)
+            }
+        })
         rv_answers.adapter = adapter
         rv_answers.itemAnimator = null
 
@@ -122,6 +152,7 @@ class MainActivity : DaggerAppCompatActivity() {
         rv_answers.addOnScrollListener(SnapOnScrollListener(snapHelper, NOTIFY_ON_SCROLL) { position ->
                 binding.selectedQuestion = position
                 binding.shouldShowSubmitBtn = (position + 1) == quizList.size
+                adapter.notifyItemChanged(position)
 
                 Log.d(TAG, "Scroll Position : $position List Size : ${quizList.size}")
         })

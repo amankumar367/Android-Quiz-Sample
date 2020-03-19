@@ -16,10 +16,6 @@ public class SnapHelperByOne extends LinearSnapHelper {
         if( currentView == null ){
             return RecyclerView.NO_POSITION;
         }
-        final int currentPosition = layoutManager.getPosition(currentView);
-        if (currentPosition == RecyclerView.NO_POSITION) {
-            return RecyclerView.NO_POSITION;
-        }
-        return currentPosition;
+        return layoutManager.getPosition(currentView);
     }
 }
