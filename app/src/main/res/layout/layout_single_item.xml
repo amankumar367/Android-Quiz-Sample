@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class ="QuizDataBinding">
+        <import type="android.view.View" />
+
+        <variable
+            name="isSelected"
+            type="Boolean" />
+
+        <variable
+            name="position"
+            type="String" />
+
+        <variable
+            name="quiz"
+            type="com.aman.quizsample.room.entity.Quiz" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cart_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_height"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="@dimen/margin_small"
+        app:cardCornerRadius="7dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/margin_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_first_answer"
+                android:layout_width="393dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:text="@{quiz.answers[0]}"
+                app:layout_constraintBottom_toTopOf="@+id/tv_second_answer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1,233 K" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_second_answer"
+                android:layout_width="393dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:text="@{quiz.answers[1]}"
+                app:layout_constraintBottom_toTopOf="@+id/tv_third_answer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_first_answer"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tv_first_answer"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_answer"
+                tools:text="5,778 K" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_third_answer"
+                android:layout_width="393dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:text="@{quiz.answers[2]}"
+                app:layout_constraintBottom_toTopOf="@+id/tv_fourth_answer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_second_answer"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tv_second_answer"
+                app:layout_constraintTop_toBottomOf="@+id/tv_second_answer"
+                tools:text="12,130 K" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_fourth_answer"
+                android:layout_width="393dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:text="@{quiz.answers[3]}"
+                app:layout_constraintBottom_toTopOf="@+id/tv_current_page"
+                app:layout_constraintEnd_toEndOf="@+id/tv_third_answer"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tv_third_answer"
+                app:layout_constraintTop_toBottomOf="@+id/tv_third_answer"
+                tools:text="101,300 K" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_current_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="22sp"
+                android:text="@{position}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_fourth_answer"
+                app:layout_constraintStart_toStartOf="@+id/tv_fourth_answer"
+                app:layout_constraintTop_toBottomOf="@+id/tv_fourth_answer"
+                tools:text="9 of 10" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

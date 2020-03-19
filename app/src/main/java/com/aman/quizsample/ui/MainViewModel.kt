@@ -28,7 +28,6 @@ class MainViewModel(private val quizRepoI: QuizRepoI): ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.d(TAG, " >>> List: $it")
                     state = state.copy(loading = false, success = true, failure = false, list = it)
                 },{
                     state = state.copy(
