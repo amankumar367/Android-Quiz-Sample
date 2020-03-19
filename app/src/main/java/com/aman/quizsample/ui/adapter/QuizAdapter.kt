@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.aman.quizsample.R
 import com.aman.quizsample.databinding.QuizDataBinding
-import com.aman.quizsample.room.entity.Answer
+import com.aman.quizsample.pojo.Answer
 import com.aman.quizsample.room.entity.Quiz
 
 class QuizAdapter(var quizList: List<Quiz>,

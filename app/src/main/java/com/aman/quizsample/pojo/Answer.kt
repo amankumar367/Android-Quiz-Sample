@@ -1,4 +1,4 @@
-package com.aman.quizsample.room.entity
+package com.aman.quizsample.pojo
 
 data class Answer(
     val question: String,

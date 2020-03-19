@@ -7,5 +7,6 @@
     // Card view
     <dimen name="card_width">290dp</dimen>
     <dimen name="card_height">375dp</dimen>
+    <dimen name="report_height">375dp</dimen>
     <dimen name="margin_small">8dp</dimen>
 </resources>

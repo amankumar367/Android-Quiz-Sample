@@ -20,7 +20,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cart_cardView"
+        android:id="@+id/answer_cardView"
         android:layout_width="@dimen/card_width"
         android:layout_height="@dimen/card_height"
         app:cardBackgroundColor="@color/white"

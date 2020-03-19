@@ -29,28 +29,28 @@
             android:id="@+id/tv_question"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginBottom="48dp"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/white"
-            android:textSize="22sp"
             android:gravity="center"
             android:text="@{state.list[selectedQuestion].question}"
+            android:textColor="@color/white"
+            android:textSize="22sp"
             android:visibility="@{state.success ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/rv_answers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="How hot is the surface of the sun?" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_answers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:orientation="horizontal"
             android:visibility="@{state.success ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/progressBar"

@@ -9,17 +9,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
 import com.aman.quizsample.R
 import com.aman.quizsample.databinding.ActivityMainBinding
 import com.aman.quizsample.extension.createFactory
-import com.aman.quizsample.extension.mapInPlace
 import com.aman.quizsample.repo.QuizRepoI
-import com.aman.quizsample.room.entity.Answer
+import com.aman.quizsample.pojo.Answer
 import com.aman.quizsample.room.entity.Quiz
 import com.aman.quizsample.ui.adapter.OnClickListener
 import com.aman.quizsample.ui.helper.SnapOnScrollListener.Companion.NOTIFY_ON_SCROLL
 import com.aman.quizsample.ui.adapter.QuizAdapter
+import com.aman.quizsample.ui.dialog.CustomResultDialog
+import com.aman.quizsample.ui.dialog.OnDialogListener
 import com.aman.quizsample.ui.helper.SnapHelperByOne
 import com.aman.quizsample.ui.helper.SnapOnScrollListener
 import dagger.android.support.DaggerAppCompatActivity
@@ -52,6 +52,7 @@ class MainActivity : DaggerAppCompatActivity() {
         setObserver()
         setRecyclerView()
         setRecyclerOnScrollListener()
+        onClick()
     }
 
     private fun init() {
@@ -82,6 +83,26 @@ class MainActivity : DaggerAppCompatActivity() {
         })
     }
 
+    private fun onClick() {
+        binding.btnSubmit.setOnClickListener {
+            val result = viewModel.checkAnswers(answeredList, quizList.size)
+
+            val fm = this.supportFragmentManager
+            val customResultDialog = CustomResultDialog.newInstance(result, object : OnDialogListener{
+                override fun onClick() {
+                    answeredList = listOf()
+                    adapter.answerList = answeredList
+                    adapter.quizList = quizList
+                    adapter.notifyDataSetChanged()
+                    adapter.notifyItemChanged(0)
+                    rv_answers.smoothScrollToPosition(0)
+                }
+            })
+            customResultDialog.retainInstance = true
+            customResultDialog.showNow(fm, CUSTOM_RESULT_DIALOG)
+        }
+    }
+
     private fun setRecyclerView() {
         rv_answers.layoutManager = LinearLayoutManager(
             this, RecyclerView.HORIZONTAL, false)
@@ -89,7 +110,12 @@ class MainActivity : DaggerAppCompatActivity() {
             override fun onItemClick(quiz: Quiz, position: Int, answerIndex: Int) {
                 if (answeredList.isEmpty()) {
                     answeredList =
-                        answeredList + Answer(quiz.question, position, answerIndex, quiz.correctIndex)
+                        answeredList + Answer(
+                            quiz.question,
+                            position,
+                            answerIndex,
+                            quiz.correctIndex
+                        )
                 } else {
                     var isItemFound = false
                     answeredList.find {
@@ -103,7 +129,12 @@ class MainActivity : DaggerAppCompatActivity() {
                     }
 
                     if (!isItemFound) {
-                        answeredList = answeredList + Answer(quiz.question, position, answerIndex, quiz.correctIndex)
+                        answeredList = answeredList + Answer(
+                            quiz.question,
+                            position,
+                            answerIndex,
+                            quiz.correctIndex
+                        )
                     }
                 }
 
@@ -160,5 +191,6 @@ class MainActivity : DaggerAppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
+        private const val CUSTOM_RESULT_DIALOG = "CUSTOM_RESULT_DIALOG"
     }
 }

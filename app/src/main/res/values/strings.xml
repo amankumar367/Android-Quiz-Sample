@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Quiz Sample</string>
     <string name="submit">Submit</string>
+    <string name="retake">Retake</string>
+    <string name="cancel">Cancel</string>
+    <string name="skipped_question">Skipped Question</string>
+    <string name="wrong_answer">Wrong Answer</string>
+    <string name="correct_answer">Correct Answer</string>
+    <string name="attempted_question">Attempted Question</string>
+    <string name="total_question">Total Question</string>
 </resources>
