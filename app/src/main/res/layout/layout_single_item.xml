@@ -21,7 +21,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cart_cardView"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/card_width"
         android:layout_height="@dimen/card_height"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="@dimen/margin_small"
@@ -39,12 +39,12 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_first_answer"
-                android:layout_width="393dp"
+                android:layout_width="0dp"
                 android:layout_height="71dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp"
+                android:textSize="@dimen/answer_text"
                 android:gravity="center"
                 android:text="@{quiz.answers[0]}"
                 app:layout_constraintBottom_toTopOf="@+id/tv_second_answer"
@@ -56,12 +56,12 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_second_answer"
-                android:layout_width="393dp"
+                android:layout_width="0dp"
                 android:layout_height="71dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp"
+                android:textSize="@dimen/answer_text"
                 android:gravity="center"
                 android:text="@{quiz.answers[1]}"
                 app:layout_constraintBottom_toTopOf="@+id/tv_third_answer"
@@ -73,12 +73,12 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_third_answer"
-                android:layout_width="393dp"
+                android:layout_width="0dp"
                 android:layout_height="71dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp"
+                android:textSize="@dimen/answer_text"
                 android:gravity="center"
                 android:text="@{quiz.answers[2]}"
                 app:layout_constraintBottom_toTopOf="@+id/tv_fourth_answer"
@@ -90,12 +90,12 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_fourth_answer"
-                android:layout_width="393dp"
+                android:layout_width="0dp"
                 android:layout_height="71dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp"
+                android:textSize="@dimen/answer_text"
                 android:gravity="center"
                 android:text="@{quiz.answers[3]}"
                 app:layout_constraintBottom_toTopOf="@+id/tv_current_page"
@@ -113,7 +113,7 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="22sp"
+                android:textSize="12sp"
                 android:text="@{position}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tv_fourth_answer"

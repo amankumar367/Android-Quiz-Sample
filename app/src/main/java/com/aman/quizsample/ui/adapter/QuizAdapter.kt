@@ -38,6 +38,15 @@ class QuizAdapter(var quizList: List<Quiz>): RecyclerView.Adapter<QuizAdapter.Qu
             quizDataBinding.tvFourthAnswer.text = quiz.answers[3]
 
             quizDataBinding.position = position.inc().toString() +" of "+ quizList.size
+
+            onClick()
+        }
+
+        private fun onClick() {
+            quizDataBinding.tvFirstAnswer.setOnClickListener {  }
+            quizDataBinding.tvSecondAnswer.setOnClickListener {  }
+            quizDataBinding.tvThirdAnswer.setOnClickListener {  }
+            quizDataBinding.tvFourthAnswer.setOnClickListener {  }
         }
     }
 

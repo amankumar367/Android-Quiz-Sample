@@ -3,17 +3,22 @@ package com.aman.quizsample.ui
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import com.aman.quizsample.R
 import com.aman.quizsample.databinding.ActivityMainBinding
 import com.aman.quizsample.extension.createFactory
 import com.aman.quizsample.repo.QuizRepoI
 import com.aman.quizsample.room.entity.Quiz
+import com.aman.quizsample.ui.helper.SnapOnScrollListener.Companion.NOTIFY_ON_SCROLL
 import com.aman.quizsample.ui.adapter.QuizAdapter
+import com.aman.quizsample.ui.helper.SnapHelperByOne
+import com.aman.quizsample.ui.helper.SnapOnScrollListener
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -28,6 +33,8 @@ class MainActivity : DaggerAppCompatActivity() {
 
     private var quizList: List<Quiz> = listOf()
 
+    private val snapHelper = SnapHelperByOne()
+
     @Inject
     lateinit var quizRepo: QuizRepoI
 
@@ -39,6 +46,7 @@ class MainActivity : DaggerAppCompatActivity() {
         getAllList()
         setObserver()
         setRecyclerView()
+        setRecyclerOnScrollListener()
     }
 
     private fun init() {
@@ -60,6 +68,7 @@ class MainActivity : DaggerAppCompatActivity() {
                         binding.state = it
                     }, 700)
 
+                    quizList = it.list!!
                     adapter.quizList = it.list!!
                     adapter.notifyDataSetChanged()
                 }
@@ -73,6 +82,49 @@ class MainActivity : DaggerAppCompatActivity() {
             this, RecyclerView.HORIZONTAL, false)
         adapter = QuizAdapter(quizList)
         rv_answers.adapter = adapter
+        rv_answers.itemAnimator = null
+
+        snapHelper.attachToRecyclerView(rv_answers)
+    }
+
+    private fun setRecyclerOnScrollListener() {
+        rv_answers.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, scrollState: Int) {
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, i: Int, i2: Int) {
+                val childCount: Int = recyclerView.childCount
+                val width: Int = recyclerView.getChildAt(0).width
+                val padding: Int = (recyclerView.width - width) / 2
+                for (j in 0 until childCount) {
+                    val v: View = recyclerView.getChildAt(j)
+
+                    var rate = 0f
+                    if (v.left <= padding) {
+                        rate = if (v.left >= padding - v.width) {
+                            (padding - v.left) * 1f / v.width
+                        } else {
+                            1f
+                        }
+                        v.scaleY = 1 - rate * 0.1f
+                        v.scaleX = 1 - rate * 0.1f
+                    } else {
+                        if (v.left <= recyclerView.width - padding) {
+                            rate = (recyclerView.width - padding - v.left) * 1f / v.width
+                        }
+                        v.scaleY = 0.9f + rate * 0.1f
+                        v.scaleX = 0.9f + rate * 0.1f
+                    }
+                }
+            }
+        })
+
+        rv_answers.addOnScrollListener(SnapOnScrollListener(snapHelper, NOTIFY_ON_SCROLL) { position ->
+                binding.selectedQuestion = position
+                binding.shouldShowSubmitBtn = (position + 1) == quizList.size
+
+                Log.d(TAG, "Scroll Position : $position List Size : ${quizList.size}")
+        })
     }
 
     companion object {
